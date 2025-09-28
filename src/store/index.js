@@ -50,12 +50,12 @@ export const mainStore = defineStore("mainData", {
         //   order: 6,
         //   show: true,
         // },
-        // {
-        //   label: "IT之家",
-        //   name: "ithome",
-        //   order: 7,
-        //   show: true,
-        // },
+        {
+          label: "IT之家",
+          name: "ithome",
+          order: 7,
+          show: true,
+        },
         {
           label: "澎湃新闻",
           name: "thepaper",
@@ -68,12 +68,12 @@ export const mainStore = defineStore("mainData", {
           order: 9,
           show: true,
         },
-        // {
-        //   label: "百度贴吧",
-        //   name: "tieba",
-        //   order: 10,
-        //   show: true,
-        // },
+        {
+          label: "百度贴吧",
+          name: "baidu-tieba",
+          order: 10,
+          show: true,
+        },
         {
           label: "稀土掘金",
           name: "juejin",
@@ -86,36 +86,37 @@ export const mainStore = defineStore("mainData", {
           order: 12,
           show: true,
         },
-        // {
-        //   label: "豆瓣电影",
-        //   name: "douban-movie",
-        //   order: 13,
-        //   show: true,
-        // },
+        {
+          label: "豆瓣电影",
+          name: "douban-movie",
+          order: 13,
+          show: true,
+        },
         {
           label: "CSDN",
           name: "csdn",
           order: 14,
           show: true,
         },
-        {
-          label: "V2EX",
-          name: "v2ex",
-          order: 16,
-          show: true,
-        },
+        { label: "36氪", name: "36kr", order: 15, show: true },
+        // {
+        //   label: "V2EX",
+        //   name: "v2ex",
+        //   order: 16,
+        //   show: true,
+        // },
         // {
         //   label: "LOL",
         //   name: "lol",
         //   order: 15,
         //   show: true,
         // },
-        // {
-        //   label: "网易新闻",
-        //   name: "netease-news",
-        //   order: 17,
-        //   show: true,
-        // },
+        {
+          label: "网易新闻",
+          name: "netease-news",
+          order: 17,
+          show: true,
+        },
         // {
         //   label: "微信读书",
         //   name: "weread",
