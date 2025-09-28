@@ -8,7 +8,7 @@ import axios from "@/api/request";
 export const getHotLists = (data) => {
   return axios({
     method: "post",
-    url: `/api/hotSearch/getHotList`,
+    url: `/api/hotSearch/getHotLists`,
     data: data,
   });
 };
