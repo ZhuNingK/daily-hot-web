@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { clearAllCache } from "@/utils/clearCache";
 
 export const mainStore = defineStore("mainData", {
   state: () => {
@@ -197,6 +198,32 @@ export const mainStore = defineStore("mainData", {
       } else {
         console.log("列表无内容，写入默认");
         this.newsArr = this.defaultNewsArr;
+      }
+    },
+    // 清除所有客户端缓存
+    async clearAllClientCache(options = {}) {
+      try {
+        $message.loading("正在清除所有缓存...", { duration: 0, id: "clearCache" });
+        const success = await clearAllCache({
+          includeServiceWorker: true,
+          reloadPage: false, // 由调用方决定是否重载
+          ...options
+        });
+        
+        if (success) {
+          $message.destroyAll();
+          $message.success("所有缓存已成功清除");
+        } else {
+          $message.destroyAll();
+          $message.warning("部分缓存清除失败，请手动刷新页面");
+        }
+        
+        return success;
+      } catch (error) {
+        $message.destroyAll();
+        $message.error("清除缓存时发生错误");
+        console.error("清除缓存失败:", error);
+        return false;
       }
     },
   },

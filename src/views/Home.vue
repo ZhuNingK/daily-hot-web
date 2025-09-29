@@ -43,10 +43,43 @@ const reset = () => {
       "确认重置站点？你的自定义数据将会恢复为默认状态！（当设置页面能正常进入并显示时请不要执行此操作！）",
     positiveText: "重置",
     negativeText: "取消",
-    onPositiveClick: () => {
-      if ($timeInterval) clearInterval($timeInterval);
-      localStorage.clear();
-      location.reload();
+    onPositiveClick: async () => {
+      try {
+        // 停止定时器
+        if ($timeInterval) clearInterval($timeInterval);
+        
+        // 使用新的缓存清理方法
+        $message.loading("正在重置站点并清除所有缓存...", { duration: 0 });
+        const success = await store.clearAllClientCache({
+          includeServiceWorker: true,
+          reloadPage: false
+        });
+        
+        if (success) {
+          $message.destroyAll();
+          $message.success("重置完成，页面即将刷新", { duration: 2000 });
+          // 等待消息显示后再刷新
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
+        } else {
+          $message.destroyAll();
+          $message.warning("重置可能不完整，建议手动刷新页面");
+          // 如果缓存清理失败，仍然执行传统的重置方法
+          localStorage.clear();
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        }
+      } catch (error) {
+        console.error("重置过程中发生错误:", error);
+        $message.destroyAll();
+        $message.error("重置失败，正在尝试传统重置方法");
+        // 降级到传统重置方法
+        if ($timeInterval) clearInterval($timeInterval);
+        localStorage.clear();
+        location.reload();
+      }
     },
   });
 };
